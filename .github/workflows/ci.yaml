@@ -16,9 +16,9 @@ on:
       - "*.txt"
 
 jobs:
-  test-otio-0130:
+  test-otio-cdl-adapter:
     env:
-      plugin_name: "otio_template_plugin"
+      plugin_name: "otio_cdl_adapter"
 
     name: "OpenTimelineIO 0.13.0"
     strategy:

@@ -9,30 +9,21 @@ import setuptools
 with io.open("README.md", "r", encoding="utf-8") as f:
     long_description = f.read()
 
-
-"""
-Make sure to replace all the dummy names, emails etc. with your details and
-package names.
-"""
-
 setuptools.setup(
-    name="your-plugin-name",
-    author="YOUR NAME",
-    author_email="your.email@domain.com",
-    version="0.0.1",
-    description="Short description of your plugin",
+    name="otio_cdl_adapter",
+    author="Joshua James Unwin",
+    author_email="josh@missiondigital.co.uk",
+    version="0.5",
+    description="Exports a .cdl file for each clip/timeline event in an OTIO instance",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    # Replace url with your repo
-    url="https://github.com/USERNAME/your-repo-name",
+    url="https://github.com/josh-mission/otio-cdl-adapter",
     packages=setuptools.find_packages(),
     entry_points={
-        # Replace otio_plugin_template with your package name
-        "opentimelineio.plugins": "otio_plugin_template = otio_plugin_template"
+        "opentimelineio.plugins": "otio_cdl_adapter = otio_cdl_adapter"
     },
     package_data={
-        # Replace otio_plugin_template with your package name
-        "otio_plugin_template": [
+        "otio_cdl_adapter": [
             "plugin_manifest.json",
         ],
     },
