@@ -1,4 +1,4 @@
-# CDL Export Adapter
+# OpenTimelineIO - CDL Export Adapter
 This simple adapter allows users to export a collection of .cdl files
 from an OTIO instance. 
 
