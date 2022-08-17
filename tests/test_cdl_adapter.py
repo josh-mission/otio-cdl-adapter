@@ -58,49 +58,49 @@ class CDLAdapterTest(unittest.TestCase):
         first_cdl_file = open(first_cdl_filepath, "r")
         last_cdl_file = open(last_cdl_filepath, "r")
 
-        first_cdl = """<?xml version="1.0" encoding="utf-8"?>
-                        <ColorDecisionList xmlns="urn:ASC:CDL:v1.01">
-                            <ColorDecision>
-                                <ColorCorrection id="A001C001_220201_ABCD">
-                                    <SOPNode>
-                                        <Slope>0.912700 0.912700 0.912700</Slope>
-                                        <Offset>0.024500 0.024500 0.024500</Offset>
-                                        <Power>1.010000 1.120000 0.910000</Power>
-                                    </SOPNode>
-                                    <SATNode>
-                                        <Saturation>1.000000</Saturation>
-                                    </SATNode>
-                                </ColorCorrection>
-                            </ColorDecision>
-                        </ColorDecisionList>
-                    """
-        last_cdl = """<?xml version="1.0" encoding="utf-8"?>
-                        <ColorDecisionList xmlns="urn:ASC:CDL:v1.01">
-                            <ColorDecision>
-                                <ColorCorrection id="A001C010_220201_ABCD">
-                                    <SOPNode>
-                                        <Slope>0.832000 0.798000 0.964000</Slope>
-                                        <Offset>0.042300 0.034500 0.035200</Offset>
-                                        <Power>1.000000 1.000000 1.000000</Power>
-                                    </SOPNode>
-                                    <SATNode>
-                                        <Saturation>0.200000</Saturation>
-                                    </SATNode>
-                                </ColorCorrection>
-                            </ColorDecision>
-                        </ColorDecisionList>
-                    """
+        cdl1 = """<?xml version="1.0" encoding="utf-8"?>
+                    <ColorDecisionList xmlns="urn:ASC:CDL:v1.01">
+                        <ColorDecision>
+                            <ColorCorrection id="A001C001_220201_ABCD">
+                                <SOPNode>
+                                    <Slope>0.912700 0.912700 0.912700</Slope>
+                                    <Offset>0.024500 0.024500 0.024500</Offset>
+                                    <Power>1.010000 1.120000 0.910000</Power>
+                                </SOPNode>
+                                <SATNode>
+                                    <Saturation>1.000000</Saturation>
+                                </SATNode>
+                            </ColorCorrection>
+                        </ColorDecision>
+                    </ColorDecisionList>
+                """
+        cdl2 = """<?xml version="1.0" encoding="utf-8"?>
+                    <ColorDecisionList xmlns="urn:ASC:CDL:v1.01">
+                        <ColorDecision>
+                            <ColorCorrection id="A001C010_220201_ABCD">
+                                <SOPNode>
+                                    <Slope>0.832000 0.798000 0.964000</Slope>
+                                    <Offset>0.042300 0.034500 0.035200</Offset>
+                                    <Power>1.000000 1.000000 1.000000</Power>
+                                </SOPNode>
+                                <SATNode>
+                                    <Saturation>0.200000</Saturation>
+                                </SATNode>
+                            </ColorCorrection>
+                        </ColorDecision>
+                    </ColorDecisionList>
+                """
 
         self.assertEqual(len(cdl_files), 10)
 
         self.assertEqual(
             first_cdl_file.read().strip(),
-            inspect.cleandoc(first_cdl)
+            inspect.cleandoc(cdl1)
         )
 
         self.assertEqual(
             last_cdl_file.read().strip(),
-            inspect.cleandoc(last_cdl)
+            inspect.cleandoc(cdl2)
         )
 
         first_cdl_file.close()
