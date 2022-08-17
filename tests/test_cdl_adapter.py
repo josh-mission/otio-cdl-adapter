@@ -16,6 +16,7 @@ MODULE = otio.adapters.from_name('cdl').module()
 SAMPLE_DATA_DIR = os.path.join(os.path.dirname(__file__), "sample_data")
 TEMP_TESTS_OUTPUT_DIR = os.path.join(SAMPLE_DATA_DIR, "CDL_EXPORTS")
 SAMPLE_CDL_EDL_PATH = os.path.join(SAMPLE_DATA_DIR, "sample_cdl_edl.edl")
+SAMPLE_CDL_ALE_PATH = os.path.join(SAMPLE_DATA_DIR, "sample_cdl_ale.ale")
 
 
 class CDLAdapterTest(unittest.TestCase):
@@ -41,7 +42,24 @@ class CDLAdapterTest(unittest.TestCase):
              "VFX_NAME_09", "VFX_NAME_10"]
         )
 
-    def test_write_cdl(self):
+    def test_ale_read(self):
+        ale_path = SAMPLE_CDL_ALE_PATH
+
+        otio_collection = otio.adapters.read_from_file(ale_path)
+        self.assertTrue(otio_collection is not None)
+        self.assertEqual(
+            type(otio_collection),
+            otio.schema.SerializableCollection
+        )
+        self.assertEqual(len(otio_collection), 8)
+        self.assertEqual(
+            [c.name for c in otio_collection],
+            ["SAMPLE_CLIP_01", "SAMPLE_CLIP_02", "SAMPLE_CLIP_03",
+             "SAMPLE_CLIP_04", "SAMPLE_CLIP_05", "SAMPLE_CLIP_06",
+             "SAMPLE_CLIP_07", "SAMPLE_CLIP_08"]
+        )
+
+    def test_write_cdl_from_edl(self):
         edl_path = SAMPLE_CDL_EDL_PATH
         timeline = otio.adapters.read_from_file(edl_path, rate=25.000)
         otio.adapters.write_to_file(
@@ -91,6 +109,71 @@ class CDLAdapterTest(unittest.TestCase):
                 """
 
         self.assertEqual(len(cdl_files), 10)
+
+        self.assertEqual(
+            first_cdl_file.read().strip(),
+            inspect.cleandoc(cdl1)
+        )
+
+        self.assertEqual(
+            last_cdl_file.read().strip(),
+            inspect.cleandoc(cdl2)
+        )
+
+        first_cdl_file.close()
+        last_cdl_file.close()
+
+
+    def test_write_cdl_from_ale(self):
+        ale_path = SAMPLE_CDL_ALE_PATH
+        timeline = otio.adapters.read_from_file(ale_path)
+        otio.adapters.write_to_file(
+            timeline,
+            TEMP_TESTS_OUTPUT_DIR,
+            adapter_name='cdl'
+        )
+
+        cdl_files = [f for f in sorted(os.listdir(TEMP_TESTS_OUTPUT_DIR))]
+
+        first_cdl_filepath = os.path.join(TEMP_TESTS_OUTPUT_DIR, cdl_files[0])
+        last_cdl_filepath = os.path.join(TEMP_TESTS_OUTPUT_DIR, cdl_files[-1])
+        first_cdl_file = open(first_cdl_filepath, "r")
+        last_cdl_file = open(last_cdl_filepath, "r")
+
+        cdl1 = """<?xml version="1.0" encoding="utf-8"?>
+                    <ColorDecisionList xmlns="urn:ASC:CDL:v1.01">
+                        <ColorDecision>
+                            <ColorCorrection id="A001C001_220201_ABCD">
+                                <SOPNode>
+                                    <Slope>1.123400 1.567800 1.432100</Slope>
+                                    <Offset>1.123400 1.567800 1.432100</Offset>
+                                    <Power>1.123400 1.567800 1.432100</Power>
+                                </SOPNode>
+                                <SATNode>
+                                    <Saturation>1.123000</Saturation>
+                                </SATNode>
+                            </ColorCorrection>
+                        </ColorDecision>
+                    </ColorDecisionList>
+                """
+        cdl2 = """<?xml version="1.0" encoding="utf-8"?>
+                    <ColorDecisionList xmlns="urn:ASC:CDL:v1.01">
+                        <ColorDecision>
+                            <ColorCorrection id="A001C008_220201_ABCD">
+                                <SOPNode>
+                                    <Slope>1.123400 1.567800 1.432100</Slope>
+                                    <Offset>1.123400 1.567800 1.432100</Offset>
+                                    <Power>1.123400 1.567800 1.432100</Power>
+                                </SOPNode>
+                                <SATNode>
+                                    <Saturation>1.123000</Saturation>
+                                </SATNode>
+                            </ColorCorrection>
+                        </ColorDecision>
+                    </ColorDecisionList>
+                """
+
+        self.assertEqual(len(cdl_files), 8)
 
         self.assertEqual(
             first_cdl_file.read().strip(),
