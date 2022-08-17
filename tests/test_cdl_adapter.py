@@ -61,9 +61,9 @@ class CDLAdapterTest(unittest.TestCase):
 
     def test_write_cdl_from_edl(self):
         edl_path = SAMPLE_CDL_EDL_PATH
-        timeline = otio.adapters.read_from_file(edl_path, rate=25.000)
+        otio_instance = otio.adapters.read_from_file(edl_path, rate=25.000)
         otio.adapters.write_to_file(
-            timeline,
+            otio_instance,
             TEMP_TESTS_OUTPUT_DIR,
             adapter_name='cdl'
         )
@@ -125,9 +125,9 @@ class CDLAdapterTest(unittest.TestCase):
 
     def test_write_cdl_from_ale(self):
         ale_path = SAMPLE_CDL_ALE_PATH
-        timeline = otio.adapters.read_from_file(ale_path)
+        otio_instance = otio.adapters.read_from_file(ale_path)
         otio.adapters.write_to_file(
-            timeline,
+            otio_instance,
             TEMP_TESTS_OUTPUT_DIR,
             adapter_name='cdl'
         )

@@ -117,7 +117,7 @@ def extract_cdls_from_serializable_collection(
 def write_to_file(input_otio, filepath):
     """
       Required OTIO function hook.
-      Actually writes to multiple .cdl files (one per clip/event in timeline)
+      Actually writes to multiple .cdl files (one per clip in an otio instance)
       filepath parameter should be a directory where the CDLs should be saved.
     """
     output_dir_path = filepath
