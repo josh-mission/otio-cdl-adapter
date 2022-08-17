@@ -15,3 +15,9 @@ parameter as there is no file extension for otio to automatically select it.
 
 ## Usage
 `otio.adapters.write_to_file(timeline, 'path/to/output/directory', adapter_name='cdl')`
+
+## More on OpenTimelineIO
+See here for more info on OpentimelineIO
+- [OpenTimelineIO docs](https://opentimelineio.readthedocs.io/en/latest/index.html)
+- [OpentimelineIO repo](https://github.com/AcademySoftwareFoundation/OpenTimelineIO)
+- [OpentimelineIO Plugin Template repo](https://github.com/OpenTimelineIO/otio-plugin-template)
