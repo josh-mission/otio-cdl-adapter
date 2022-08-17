@@ -123,7 +123,6 @@ class CDLAdapterTest(unittest.TestCase):
         first_cdl_file.close()
         last_cdl_file.close()
 
-
     def test_write_cdl_from_ale(self):
         ale_path = SAMPLE_CDL_ALE_PATH
         timeline = otio.adapters.read_from_file(ale_path)
