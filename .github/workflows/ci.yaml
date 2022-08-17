@@ -41,6 +41,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 pytest pytest-cov -V OpenTimelineIO==0.13.0
 
+      - name: Install pip v21 for deprecated Python 2.7 support
+        if: ${{ matrix.python-version }} == 2.7
+        run: python -m pip install --upgrade "pip < 21.0"
+
       - name: Install Plugin
         run: |
           pip install -e .
