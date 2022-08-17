@@ -20,7 +20,7 @@ jobs:
     env:
       plugin_name: "otio_cdl_adapter"
 
-    name: "OpenTimelineIO 0.13.0"
+    name: "OpenTimelineIO CDL Adapter"
     strategy:
       matrix:
         python-version: [2.7, 3.7, 3.8]
