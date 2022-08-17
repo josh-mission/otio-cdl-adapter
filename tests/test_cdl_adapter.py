@@ -38,8 +38,7 @@ class CDLAdapterTest(unittest.TestCase):
             [c.name for c in timeline.tracks[0]],
             ["VFX_NAME_01", "VFX_NAME_02", "VFX_NAME_03", "VFX_NAME_04",
              "VFX_NAME_05", "VFX_NAME_06", "VFX_NAME_07", "VFX_NAME_08",
-             "VFX_NAME_09", "VFX_NAME_10"
-            ]
+             "VFX_NAME_09", "VFX_NAME_10"]
         )
 
     def test_write_cdl(self):

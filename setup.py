@@ -14,7 +14,7 @@ setuptools.setup(
     author="Joshua James Unwin",
     author_email="josh@missiondigital.co.uk",
     version="0.5",
-    description="Exports a .cdl file for each clip/timeline event in an OTIO instance",
+    description="Exports a .cdl file for each clip event in an OTIO instance",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/josh-mission/otio-cdl-adapter",
