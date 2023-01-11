@@ -1,7 +1,5 @@
 import os
 import re
-import sys
-import unicodedata
 
 
 def secure_filename(filename):
