@@ -16,6 +16,7 @@ MODULE = otio.adapters.from_name('cdl').module()
 SAMPLE_DATA_DIR = os.path.join(os.path.dirname(__file__), "sample_data")
 TEMP_TESTS_OUTPUT_DIR = os.path.join(SAMPLE_DATA_DIR, "CDL_EXPORTS")
 SAMPLE_CDL_EDL_PATH = os.path.join(SAMPLE_DATA_DIR, "sample_cdl_edl.edl")
+SAMPLE_EDL_PATH_INSECURE_FILENAMES  = os.path.join(SAMPLE_DATA_DIR, "sample_cdl_edl_with_insecure_filenames.edl")
 SAMPLE_CDL_ALE_PATH = os.path.join(SAMPLE_DATA_DIR, "sample_cdl_ale.ale")
 
 
@@ -186,6 +187,22 @@ class CDLAdapterTest(unittest.TestCase):
 
         first_cdl_file.close()
         last_cdl_file.close()
+
+
+    def test_filesnames_are_secure(self):
+        edl_path = SAMPLE_EDL_PATH_INSECURE_FILENAMES
+        otio_instance = otio.adapters.read_from_file(edl_path, rate=25.000)
+        otio.adapters.write_to_file(
+            otio_instance,
+            TEMP_TESTS_OUTPUT_DIR,
+            adapter_name='cdl'
+        )
+
+        cdl_files = [f for f in sorted(os.listdir(TEMP_TESTS_OUTPUT_DIR))]
+
+        assert cdl_files[0] == 'filename.cdl'
+        assert cdl_files[1] == 'my_file_name.cdl'
+        assert cdl_files[2] == 'my_file_name2.cdl'
 
 
 if __name__ == '__main__':

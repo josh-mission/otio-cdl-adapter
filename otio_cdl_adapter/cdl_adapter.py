@@ -19,6 +19,8 @@ import os
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 
+from otio_cdl_adapter.utils import secure_filename
+
 
 def get_reel_name_from_clip(clip):
     # Tries to get the reelname of a clip from all the possible locations
@@ -87,7 +89,7 @@ def create_cdl_file(clip, output_dir_path):
     try:
         cdl_filepath = os.path.join(
             output_dir_path,
-            clip.name + ".cdl"
+            secure_filename(clip.name + ".cdl")
         )
         cdl_string = convert_to_cdl(clip)
 
