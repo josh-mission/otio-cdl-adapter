@@ -40,11 +40,6 @@ def secure_filename(filename):
         "NUL",
     )
 
-    # Hack to handle normalize() in both Python 2.7 and Python 3+
-    if sys.version_info.major == 3:
-        unicode = str
-
-    filename = unicodedata.normalize("NFKD", unicode(filename))
     filename = filename.encode("ascii", "ignore").decode("ascii")
 
     for sep in os.sep, os.path.altsep:
