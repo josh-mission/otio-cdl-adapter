@@ -39,7 +39,13 @@ def secure_filename(filename):
         "NUL",
     )
 
-    filename = unicodedata.normalize("NFKD", filename)
+    # Hack to handle normalize() in both Python 2.7 and Python 3+
+    try:
+        unicode('')
+    except NameError:
+        unicode = str
+
+    filename = unicodedata.normalize("NFKD", unicode(filename))
     filename = filename.encode("ascii", "ignore").decode("ascii")
 
     for sep in os.sep, os.path.altsep:
