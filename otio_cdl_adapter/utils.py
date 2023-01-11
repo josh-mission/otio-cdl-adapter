@@ -45,7 +45,8 @@ def secure_filename(filename: str) -> str:
     for sep in os.sep, os.path.altsep:
         if sep:
             filename = filename.replace(sep, " ")
-    filename = str(_filename_ascii_strip_re.sub("", "_".join(filename.split()))).strip(
+    filename = str(_filename_ascii_strip_re.
+                   sub("", "_".join(filename.split()))).strip(
         "._"
     )
 

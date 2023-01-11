@@ -21,3 +21,6 @@ See here for more info on OpentimelineIO
 - [OpenTimelineIO docs](https://opentimelineio.readthedocs.io/en/latest/index.html)
 - [OpentimelineIO repo](https://github.com/AcademySoftwareFoundation/OpenTimelineIO)
 - [OpentimelineIO Plugin Template repo](https://github.com/OpenTimelineIO/otio-plugin-template)
+
+## Linting
+Linting is handled with `flake8`
