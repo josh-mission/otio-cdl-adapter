@@ -3,7 +3,7 @@ import re
 import unicodedata
 
 
-def secure_filename(filename: str) -> str:
+def secure_filename(filename):
     r"""
     Based on the Werkzeug library: https://github.com/pallets/werkzeug
     Pass it a filename and it will return a secure version of it.  This
