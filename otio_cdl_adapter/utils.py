@@ -1,5 +1,6 @@
 import os
 import re
+import sys
 import unicodedata
 
 
@@ -40,9 +41,7 @@ def secure_filename(filename):
     )
 
     # Hack to handle normalize() in both Python 2.7 and Python 3+
-    try:
-        unicode('')
-    except NameError:
+    if sys.version_info.major == 3:
         unicode = str
 
     filename = unicodedata.normalize("NFKD", unicode(filename))
