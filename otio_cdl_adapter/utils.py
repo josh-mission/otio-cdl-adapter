@@ -58,6 +58,6 @@ def secure_filename(filename):
         and filename
         and filename.split(".")[0].upper() in _windows_device_files
     ):
-        filename = f"_{filename}"
+        filename = "_" + filename
 
     return filename
